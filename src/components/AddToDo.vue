@@ -1,12 +1,19 @@
 <template>
   <div class="input-wrapper">
-    <InputCustom />
-    <ButtonCustom>+</ButtonCustom>
+    <InputCustom
+      v-model="text"
+    />
+    <ButtonCustom
+      :onclick="addTodo"
+    >
+    +
+    </ButtonCustom>
   </div>
 </template>
 <script>
 import {
   defineComponent,
+  ref,
 } from 'vue';
 
 // components
@@ -28,8 +35,14 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'focus'],
   setup() {
-    return {
+    const text = ref('addddd');
 
+    function addTodo() {
+      console.log(text.value);
+    }
+    return {
+      text,
+      addTodo,
     };
   },
 });

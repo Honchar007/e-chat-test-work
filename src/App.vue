@@ -6,6 +6,11 @@
 </template>
 
 <script>
+import { onMounted } from 'vue';
+import { useStore } from 'vuex';
+import { Actions } from './store/props';
+
+// components
 import AddToDo from './components/AddToDo.vue';
 import ToDoItem from './components/ToDoItem.vue';
 
@@ -14,6 +19,13 @@ export default {
   components: {
     AddToDo,
     ToDoItem,
+  },
+  setup() {
+    const store = useStore();
+
+  onMounted(() => {
+    store.dispatch(Actions.updateFromLocalStorage);
+  });
 }
 }
 </script>

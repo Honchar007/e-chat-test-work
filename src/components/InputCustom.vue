@@ -2,7 +2,7 @@
   <input
     class="input-content"
     :value="modelValue"
-    :disabled="disabled"
+    :readonly="readonly"
     @focus="$emit('focus', $event)"
     @input="$emit('update:modelValue', $event.target.value)"
   />
@@ -18,9 +18,9 @@ export default defineComponent({
   components: {
   },
   props: {
-    label: {
-      type: String,
-      required: true,
+    readonly: {
+      type: Boolean,
+      default: false,
     },
     modelValue: {},
   },
