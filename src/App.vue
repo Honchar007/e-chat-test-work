@@ -1,17 +1,18 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <ToDoItem />
+  <div class="container">
+    <AddToDo />
+    <ToDoItem />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AddToDo from './components/AddToDo.vue';
 import ToDoItem from './components/ToDoItem.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    AddToDo,
     ToDoItem,
 }
 }
@@ -25,5 +26,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 </style>
