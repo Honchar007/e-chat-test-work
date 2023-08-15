@@ -1,11 +1,9 @@
 <template>
-  <Transition>
     <div class="input-wrapper">
       <CheckboxCustom
         :modelValue="checked"
         @change="changeCheck"
       />
-      {{ readMode }}
       <InputCustom
         v-model="text"
         :readonly="readMode"
@@ -28,7 +26,6 @@
         <img src="../assets/close.svg" alt="remove todo" />
       </ButtonCustom>
     </div>
-  </Transition>
 </template>
 <script>
 import {
@@ -105,6 +102,7 @@ export default defineComponent({
   flex-direction: row;
   justify-content: center;
   gap:0.5rem;
+  transition: 0.3s ease-in-out all;
 
   .input-content {
     position: relative;

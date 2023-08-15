@@ -39,12 +39,17 @@ export default defineComponent({
     const text = ref('');
 
     function addTodo() {
-      const todo = {
-        id: uuidv4(),
-        text: text.value,
-        done: false,
-      };
-      store.dispatch(Actions.addTodo, todo);
+      if(text.value !== '') {
+        const todo = {
+          id: uuidv4(),
+          text: text.value,
+          done: false,
+        };
+        store.dispatch(Actions.addTodo, todo);
+        text.value = '';
+      } else {
+        alert('You can not add empty task');
+      }
     }
     return {
       text,
@@ -58,6 +63,7 @@ export default defineComponent({
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 100%;
   gap:0.5rem;
 
   .input-content {

@@ -50,19 +50,19 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
+  padding: 0 2rem;
+  margin-top: 2rem;
   gap: 1rem;
 
   .todo-list {
     display: flex;
     flex-direction: column-reverse;
     gap: 1rem;
-    transition: 0.3s ease-in-out all;
   }
 }
 </style>
