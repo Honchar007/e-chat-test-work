@@ -1,6 +1,9 @@
 <template>
   <div class="input-wrapper">
-    <CheckboxCustom :modelValue="checked" />
+    <CheckboxCustom
+      :modelValue="checked"
+      @change="changeCheck"
+    />
     <InputCustom
       v-model="text"
     />
@@ -17,6 +20,8 @@ import {
   defineComponent,
   ref,
 } from 'vue';
+import { useStore } from 'vuex';
+import { Actions } from '../store/props';
 
 // components
 import CheckboxCustom from './CheckboxCustom.vue';
@@ -31,6 +36,10 @@ export default defineComponent({
     InputCustom,
   },
   props: {
+    todo: {
+      type: Object,
+      required: true,
+    },
     label: {
       type: String,
       required: true,
@@ -43,11 +52,19 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'focus'],
   setup(props) {
+    const store = useStore();
+
     const text = ref(props.label);
-    const checked = ref(props.done);
+    const checked = ref(props.todo.done);
+
+    const changeCheck = () => {
+      store.dispatch(Actions.editTodo, { ...props.todo, done: !props.todo.done });
+    };
+
     return {
       text,
       checked,
+      changeCheck,
     };
   },
 });

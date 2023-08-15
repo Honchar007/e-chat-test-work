@@ -5,6 +5,7 @@
       v-for="todo in todos"
       :checked="todo.done"
       :key="todo.id"
+      :todo="todo"
       :label="todo.text"
     />
   </div>

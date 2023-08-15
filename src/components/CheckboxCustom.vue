@@ -6,7 +6,7 @@
           hidden
           :disabled="disabled"
           :checked="modelValue"
-          @change="$emit('update:modelValue', $event.target.checked)"
+          @onchange="handleChange"
         />
         <span class="checkmark" />
       </span>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'CheckboxCustom',
@@ -27,6 +27,21 @@ export default defineComponent({
     },
   },
   emits: ['update:modelValue'],
+  setup(props, { emit }) {
+    const isChecked = ref(props.modelValue);
+
+    const handleChange = event => {
+      const newValue = event.target.checked;
+      isChecked.value = newValue;
+      emit('update:modelValue', newValue);
+      emit('onchange', newValue);
+    };
+
+    return {
+      isChecked,
+      handleChange,
+    };
+  }
 });
 </script>
 

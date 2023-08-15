@@ -22,7 +22,8 @@ export default createStore({
     [Mutations.editTodo](state, editedTodo) {
       const todoTmp = state.todos.find((todo) => todo.id === editedTodo.id);
       if (todoTmp) {
-        todoTmp.name = editedTodo.name;
+        todoTmp.text = editedTodo.text;
+        todoTmp.done = editedTodo.done;
       }
       localStorage.setItem('todos', JSON.stringify(state.todos));
     },
