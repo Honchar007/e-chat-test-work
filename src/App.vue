@@ -1,13 +1,15 @@
 <template>
   <div class="container">
     <AddToDo />
-    <ToDoItem
-      v-for="todo in todos"
-      :checked="todo.done"
-      :key="todo.id"
-      :todo="todo"
-      :label="todo.text"
-    />
+    <template class="todo-list">
+      <ToDoItem
+        v-for="todo in todos"
+        :checked="todo.done"
+        :key="todo.id"
+        :todo="todo"
+        :label="todo.text"
+      />
+    </template>
   </div>
 </template>
 
@@ -55,5 +57,12 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  .todo-list {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
+    transition: 0.3s ease-in-out all;
+  }
 }
 </style>

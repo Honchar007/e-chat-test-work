@@ -9,7 +9,6 @@ export default createStore({
   },
   getters: {
     getTodos: (state) => state.todos,
-    getNextIndex: (state) => state.todos.length > 0 ? state.todos.length : 0,
   },
   mutations: {
     [Mutations.setTodos](state, todos) {
