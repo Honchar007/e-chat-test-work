@@ -1,15 +1,12 @@
 <template>
   <div class="input-wrapper">
-    <CheckboxCustom />
-    <InputCustom />
-    <!-- <input
-      class="input-content"
-      :value="modelValue"
-      :disabled="disabled"
-      @focus="$emit('focus', $event)"
-      @input="$emit('update:modelValue', $event.target.value)"
-    /> -->
-    <ButtonCustom>+</ButtonCustom>
+    <CheckboxCustom :modelValue="checked" />
+    <InputCustom
+      v-model="text"
+    />
+    <ButtonCustom>
+      <img src="../assets/Edit.svg" alt="add new todo" />
+    </ButtonCustom>
     <ButtonCustom>
       <img src="../assets/close.svg" alt="add new todo" />
     </ButtonCustom>
@@ -18,6 +15,7 @@
 <script>
 import {
   defineComponent,
+  ref,
 } from 'vue';
 
 // components
@@ -37,12 +35,19 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    done: {
+      type: Boolean,
+      default: false,
+    },
     modelValue: {},
   },
   emits: ['update:modelValue', 'focus'],
-  setup() {
+  setup(props) {
+    const text = ref(props.label);
+    const checked = ref(props.done);
     return {
-
+      text,
+      checked,
     };
   },
 });

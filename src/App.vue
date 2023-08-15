@@ -1,12 +1,17 @@
 <template>
   <div class="container">
     <AddToDo />
-    <ToDoItem />
+    <ToDoItem
+      v-for="todo in todos"
+      :checked="todo.done"
+      :key="todo.id"
+      :label="todo.text"
+    />
   </div>
 </template>
 
 <script>
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import { Actions } from './store/props';
 
@@ -23,10 +28,15 @@ export default {
   setup() {
     const store = useStore();
 
-  onMounted(() => {
-    store.dispatch(Actions.updateFromLocalStorage);
-  });
-}
+    const todos = computed(() => store.getters.getTodos);
+
+    onMounted(() => {
+      store.dispatch(Actions.getFromLocalStorage);
+    });
+    return{
+      todos,
+    };
+  }
 }
 </script>
 

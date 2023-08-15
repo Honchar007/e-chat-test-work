@@ -15,6 +15,8 @@ import {
   defineComponent,
   ref,
 } from 'vue';
+import { useStore } from 'vuex';
+import { Actions } from '../store/props';
 
 // components
 import ButtonCustom from './ButtonCustom.vue';
@@ -27,18 +29,22 @@ export default defineComponent({
     InputCustom,
   },
   props: {
-    label: {
-      type: String,
-      required: true,
-    },
     modelValue: {},
   },
   emits: ['update:modelValue', 'focus'],
   setup() {
-    const text = ref('addddd');
+    const store = useStore();
+
+    const text = ref('');
 
     function addTodo() {
-      console.log(text.value);
+      const currId = store.getters.getNextIndex;
+      const todo = {
+        id: currId,
+        text: text.value,
+        done: false,
+      };
+      store.dispatch(Actions.addTodo, todo);
     }
     return {
       text,

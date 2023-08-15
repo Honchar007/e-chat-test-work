@@ -9,14 +9,15 @@ export default createStore({
   },
   getters: {
     getTodos: (state) => state.todos,
+    getNextIndex: (state) => state.todos.length > 0 ? state.todos.length : 0,
   },
   mutations: {
     [Mutations.setTodos](state, todos) {
       state.todos = todos;
     },
     [Mutations.addTodo](state,  todo) {
-      state.todos.push(todo);
-      localStorage.setItem('todos', JSON.stringify(state.tasks));
+      state.todos = [...state.todos, todo];
+      localStorage.setItem('todos', JSON.stringify(state.todos));
     },
     [Mutations.editTodo](state, editedTodo) {
       const todoTmp = state.todos.find((todo) => todo.id === editedTodo.id);
@@ -31,19 +32,20 @@ export default createStore({
     },
   },
   actions: {
-    [Actions.addTodo]({ commit }, todo) {
-      commit([Mutations.addTodo], todo);
+    async [Actions.addTodo]({ commit }, todo) {
+      console.log('add',todo);
+      await commit(Mutations.addTodo, todo);
     },
-    [Actions.removeTodo]({ commit }, todoId) {
-      commit([Mutations.removeTodo], todoId);
+    async [Actions.removeTodo]({ commit }, todoId) {
+      await commit(Mutations.removeTodo, todoId);
     },
-    [Actions.editTodo]({ commit }, editedTodo) {
-      commit([Mutations.editTodo], editedTodo);
+    async [Actions.editTodo]({ commit }, editedTodo) {
+      await commit(Mutations.editTodo, editedTodo);
     },
-    [Actions.getFromLocalStorageUser]({ commit }, ) {
+    async [Actions.getFromLocalStorage]({ commit }, ) {
       const todosData = localStorage.getItem('todos');
       if (todosData != null) {
-        commit([Mutations.setTodos], JSON.parse(todosData));
+        await commit(Mutations.setTodos, JSON.parse(todosData));
       }
     }
   },

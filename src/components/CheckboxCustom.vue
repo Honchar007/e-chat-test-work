@@ -19,11 +19,6 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'CheckboxCustom',
   props: {
-    label: {
-      type: String,
-      default: '',
-      required: true,
-    },
     disabled: {
       type: Boolean,
       default: false,
