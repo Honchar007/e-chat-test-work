@@ -1,13 +1,14 @@
 <template>
   <div class="input-wrapper">
     <CheckboxCustom />
-    <input
+    <InputCustom />
+    <!-- <input
       class="input-content"
       :value="modelValue"
       :disabled="disabled"
       @focus="$emit('focus', $event)"
       @input="$emit('update:modelValue', $event.target.value)"
-    />
+    /> -->
     <ButtonCustom>+</ButtonCustom>
     <ButtonCustom>
       <img src="../assets/close.svg" alt="add new todo" />
@@ -22,12 +23,14 @@ import {
 // components
 import CheckboxCustom from './CheckboxCustom.vue';
 import ButtonCustom from './ButtonCustom.vue';
+import InputCustom from './InputCustom.vue';
 
 export default defineComponent({
   name: 'ToDoItem',
   components: {
     CheckboxCustom,
     ButtonCustom,
+    InputCustom,
   },
   props: {
     label: {
